@@ -2,7 +2,8 @@
     "java.project.sourcePaths": [
         "thirdlec.java",
         "Secondlec.java",
+        "Fourlec.java",
         "Firstlec.java",
-        "Fourlec.java"
+        "Fifthlec.java"
     ]
 }
