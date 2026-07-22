@@ -5,7 +5,8 @@
         "Fourlec.java",
         "Firstlec.java",
         "Fifthlec.java",
+        "BuubleSort",
         "Array.java",
-        "BuubleSort"
+        "SelectionSort"
     ]
 }
