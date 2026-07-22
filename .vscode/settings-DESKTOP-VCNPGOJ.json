@@ -1,0 +1,12 @@
+{
+    "java.project.sourcePaths": [
+        "thirdlec.java",
+        "Secondlec.java",
+        "Fourlec.java",
+        "Firstlec.java",
+        "Fifthlec.java",
+        "BuubleSort",
+        "Array.java",
+        "SelectionSort"
+    ]
+}
