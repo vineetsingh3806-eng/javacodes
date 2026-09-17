@@ -1,12 +1,16 @@
 {
     "java.project.sourcePaths": [
         "thirdlec.java",
+        "SelectionSort",
         "Secondlec.java",
         "Fourlec.java",
         "Firstlec.java",
         "Fifthlec.java",
         "BuubleSort",
+        "BinarySearch",
         "Array.java",
-        "SelectionSort"
-    ]
+        "Strings.java"
+    ],
+    "java.project.explorer.showNonJavaResources": false,
+    "java.dependency.syncWithFolderExplorer": false
 }

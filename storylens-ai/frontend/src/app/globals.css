@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 226 100% 98%;
+    --foreground: 226 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 25% 12%;
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 226 40% 95%;
+    --muted-foreground: 226 12% 46%;
+    --border: 226 32% 90%;
+    --input: 226 32% 90%;
+    --ring: 243 75% 59%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 226 30% 96%;
+    --card: 222 40% 11%;
+    --card-foreground: 226 30% 96%;
+    --primary: 243 75% 65%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 262 83% 62%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 222 30% 16%;
+    --muted-foreground: 226 20% 68%;
+    --border: 222 28% 22%;
+    --input: 222 28% 22%;
+    --ring: 243 75% 65%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  ::selection {
+    @apply bg-accent-500/20 text-accent-700;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card surface */
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-glass dark:bg-slate-900/50 dark:border-white/10;
+  }
+
+  .glass-strong {
+    @apply bg-white/80 backdrop-blur-2xl border border-white/50 shadow-glass-lg dark:bg-slate-900/70 dark:border-white/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 via-accent-500 to-blue-500 bg-clip-text text-transparent;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-600 via-accent-500 to-blue-600;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-600/25 transition-all hover:shadow-primary-600/40 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/70 px-5 py-2.5 text-sm font-semibold text-slate-700 backdrop-blur transition-colors hover:bg-white dark:border-white/10 dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white/20;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 outline-none backdrop-blur transition focus:border-accent-500 focus:ring-2 focus:ring-accent-500/30 dark:border-white/10 dark:bg-white/5 dark:text-slate-100;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-white/50 bg-white/60 backdrop-blur-xl shadow-glass dark:border-white/10 dark:bg-slate-900/50;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(139, 92, 246, 0.06) 25%,
+      rgba(139, 92, 246, 0.14) 50%,
+      rgba(139, 92, 246, 0.06) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.35);
+    border-radius: 9999px;
+  }
+}
+

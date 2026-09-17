@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class CommonElement {
     public static void main(String[]args){
-        int[]a={1,1,2,3,3,4};
+        int[]a={1,1,2,3,3,4};               //if the two arrays are not sorted then sort it with built-in method then proceed forward..
         int[]b={2,2,3,4,5,6,7};
         int i=0,j=0; 
         int k=0;

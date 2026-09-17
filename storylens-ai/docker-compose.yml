@@ -1,0 +1,97 @@
+version: "3.9"
+
+# ============================================================
+# StoryLens AI — Full-stack orchestration
+# Run with:  docker-compose up --build
+# ============================================================
+
+services:
+  # ---------- PostgreSQL Database ----------
+  postgres:
+    image: postgres:16-alpine
+    container_name: storylens_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-storylens}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-storylens_password}
+      POSTGRES_DB: ${POSTGRES_DB:-storylens}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-storylens}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ---------- Qdrant Vector Database ----------
+  qdrant:
+    image: qdrant/qdrant:v1.12.1
+    container_name: storylens_qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # ---------- FastAPI Backend ----------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: storylens_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override host-based vars to use Docker service names
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-storylens}:${POSTGRES_PASSWORD:-storylens_password}@postgres:5432/${POSTGRES_DB:-storylens}
+      QDRANT_URL: http://qdrant:6333
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # ---------- Next.js Frontend ----------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: storylens_frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NEXT_PUBLIC_API_URL: ${BACKEND_URL:-http://localhost:8000}${API_V1_PREFIX:-/api/v1}
+      NEXT_PUBLIC_ENVIRONMENT: ${ENVIRONMENT:-development}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+      - frontend_next:/app/.next
+    depends_on:
+      - backend
+    command: npm run dev
+
+# ---------- Named Volumes ----------
+volumes:
+  postgres_data:
+  qdrant_data:
+  backend_uploads:
+  frontend_node_modules:
+  frontend_next:
+

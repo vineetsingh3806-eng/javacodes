@@ -1,0 +1,4 @@
+# StoryLens AI robots.txt
+User-agent: *
+Allow: /
+

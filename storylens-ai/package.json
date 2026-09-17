@@ -1,0 +1,31 @@
+{
+  "name": "storylens-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StoryLens AI — Turn any document into interactive stories (timelines, mind maps, quizzes, presentations, podcasts).",
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "docker-compose up --build",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build": "docker-compose build",
+    "up": "docker-compose up",
+    "down": "docker-compose down",
+    "clean": "docker-compose down -v --remove-orphans",
+    "logs": "docker-compose logs -f",
+    "backend": "cd backend && uvicorn app.main:app --reload",
+    "setup": "bash scripts/setup.sh"
+  },
+  "keywords": [
+    "ai",
+    "document",
+    "timeline",
+    "mindmap",
+    "quiz",
+    "presentation",
+    "podcast"
+  ],
+  "license": "MIT"
+}
+

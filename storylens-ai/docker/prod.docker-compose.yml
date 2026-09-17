@@ -1,0 +1,21 @@
+# ============================================================
+# StoryLens AI — Production Compose Overrides
+# Use: docker-compose -f docker-compose.yml -f docker/prod.docker-compose.yml up --build -d
+# ============================================================
+version: "3.9"
+
+services:
+  backend:
+    # Production: no hot-reload, build-only code copy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4"
+    volumes: []  # remove bind mounts in prod
+
+  frontend:
+    # Production: build static export / run standalone server
+    command: npm run start
+    environment:
+      NEXT_PUBLIC_ENVIRONMENT: production
+    volumes: []  # remove bind mounts in prod
+

@@ -1,4 +1,4 @@
-public class AllZeroestoend {
+public class AllZeroestoendm {
     public static void main(String[]args){
         int[]arr={1,2,0,0,3,2,0,1,4,0,7,8};
         //using bubble sort...

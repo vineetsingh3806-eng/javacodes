@@ -1,0 +1,70 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# Builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Next.js
+next-env.d.ts
+*.next
+
+# Python
+*.so
+.venv/
+
+# Database
+*.db
+*.sqlite3
+
+# Uploads / Runtime data
+backend/uploads/
+backend/temp/
+uploads/
+media/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+
+# Coverage
+coverage/
+htmlcov/
+
+# Misc
+*.tmp
+*.bak
+
